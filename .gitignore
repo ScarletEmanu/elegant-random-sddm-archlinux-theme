@@ -12,6 +12,9 @@ theme.conf.user
 src/
 elegant-sddm-*/
 
+#dir of backgrounds
+*/images
+
 
 # Arch Packaging
 packaging/.SRCINFO

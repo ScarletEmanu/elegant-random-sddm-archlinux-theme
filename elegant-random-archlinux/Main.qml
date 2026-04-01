@@ -24,16 +24,11 @@ Rectangle {
             property variant geometry: screenModel.geometry(index)
             x: geometry.x; y: geometry.y; width: geometry.width; height:geometry.height
             
-            Image {
+            Background {
                 id: bg
                 anchors.fill: parent
-                source: Qt.resolvedUrl(config.background)
-                fillMode: Image.PreserveAspectCrop
-                onStatusChanged: {
-                    if (status == Image.Error && source != Qt.resolvedUrl(config.defaultBackground)) {
-                        source = Qt.resolvedUrl(config.defaultBackground)
-                    }
-                }
+                sceneBackgroundImage: config.background
+                sceneBackgroundType: config.type
             }
             
             MultiEffect {

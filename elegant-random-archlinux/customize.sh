@@ -49,6 +49,30 @@ fi
 
 echo -e "${GREEN}Configuration saved!${NC}"
 
+# Type Background Selection
+echo
+echo "Choose background type:"
+echo "1. Random Picture [Default]"
+echo "2. Fixed Picture"
+read -p "Enter selection [1-2]: " -n 1 -r < /dev/tty
+echo
+
+TYPE_VAL="random"
+elif [[ $REPLY =~ ^[2]$ ]]; then
+    TYPE_VAL="image"
+fi
+
+if grep -q "type=" "$CONFIG_FILE" 2>/dev/null; then
+    sed -i "s|^type=.*|type=$TYPE_VAL|" "$CONFIG_FILE"
+else
+    if [ ! -f "$CONFIG_FILE" ]; then
+            echo "[General]" > "$CONFIG_FILE"
+    fi
+    echo "type=$TYPE_VAL" >> "$CONFIG_FILE"
+fi
+
+echo -e "${GREEN}Configuration saved!${NC}"
+
 # Activation Logic
 read -p "Do you want to ACTIVATE the theme now? [y/N] " -n 1 -r < /dev/tty
 echo
