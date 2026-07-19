@@ -27,6 +27,7 @@ FocusScope {
         sourceSize.width: parent.width
         sourceSize.height: parent.height
         fillMode: Image.PreserveAspectCrop
+        visible: parent.sceneBackgroundType === "image"
         smooth: true;
     }
 
@@ -37,34 +38,7 @@ FocusScope {
         sourceSize.height: parent.height
         fillMode: Image.PreserveAspectCrop
         smooth: true;
-        visible: source !== ""
+        visible: parent.sceneBackgroundType === "random" && source !== ""
         asynchronous: true
     }
-
-    states: [
-        State {
-            name: "imageBackground"
-            when: sceneBackgroundType === "image"
-            PropertyChanges {
-                target: sceneImageBackground
-                visible: true
-            }
-            PropertyChanges {
-                target: sceneRandomBackground
-                visible: false
-            }
-        },
-        State {
-            name: "randomBackground"
-            when: sceneBackgroundType === "random"
-            PropertyChanges {
-                target: sceneImageBackground
-                visible: false
-            }
-            PropertyChanges {
-                target: sceneRandomBackground
-                visible: true
-            }
-	    }
-    ]
 }

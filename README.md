@@ -1,6 +1,6 @@
 # Elegant SDDM Theme for Arch Linux
 
-![Modern Design](elegant-archlinux/Screenshots/modern.png)
+![Modern Design](elegant-random-archlinux/Screenshots/modern.png)
 
 Originally released in 2016, I have completely modernized **Elegant Arch Linux** SDDM theme to meet today's standards while keeping the classic elegance you love.
 
