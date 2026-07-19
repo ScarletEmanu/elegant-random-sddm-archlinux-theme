@@ -50,17 +50,26 @@ Rectangle {
                 font.pixelSize: loginPanel.baseFontSize
             }
 
-            QQC2.TextField {
+            QQC2.ComboBox {
                 id: name
                 Layout.fillWidth: true
                 Layout.preferredHeight: loginPanel.height / 9
-                text: userModel.lastUser
                 font.pixelSize: loginPanel.height / 20
-                color: loginPanel.textColor
-                horizontalAlignment: Text.AlignHCenter
-                placeholderText: "whoami"
-                placeholderTextColor: Qt.rgba(1, 1, 1, 0.5)
                 
+                model: userModel
+                textRole: "name" 
+                currentIndex: userModel.lastIndex
+
+                contentItem: Text {
+                    leftPadding: loginPanel.width * 0.02
+                    text: name.displayText
+                    font: name.font
+                    color: loginPanel.textColor
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                }
+
                 background: Rectangle {
                     color: "transparent"
                     border.color: name.activeFocus ? loginPanel.primaryColor : "lightgrey"
@@ -72,7 +81,7 @@ Rectangle {
 
                 Keys.onPressed: (event) => {
                     if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                        sddm.login(name.text, password.text, session.currentIndex)
+                        sddm.login(name.currentText, password.text, session.currentIndex)
                         event.accepted = true
                     }
                 }
@@ -301,7 +310,7 @@ Rectangle {
                     border.width: loginButton.hovered ? Math.max(1, loginPanel.height / 500) : 0
                 }
 
-                onClicked: sddm.login(name.text, password.text, session.currentIndex)
+                onClicked: sddm.login(name.currentText, password.text, session.currentIndex)
 
                 KeyNavigation.tab: shutdownButton
             }
@@ -361,9 +370,6 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        if (name.text == "")
-            name.focus = true
-        else
-            password.focus = true
+        password.forceActiveFocus()
     }
 }
